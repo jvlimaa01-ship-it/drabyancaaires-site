@@ -94,6 +94,7 @@ h1, h2, h3 { font-weight: 600; margin: 0; letter-spacing: -0.01em; }
   display: flex;
   align-items: center;
   gap: 10px;
+  text-decoration: none;
 }
 .brand-mark {
   color: var(--accent-dark);
@@ -368,6 +369,7 @@ h1, h2, h3 { font-weight: 600; margin: 0; letter-spacing: -0.01em; }
 @media (min-width: 860px) { .main-nav { display: flex; } }
 .site-header { position: sticky; top: 0; z-index: 50; }
 
+.empathy-inner { max-width: 720px; margin: 0 auto; text-align: center; }
 .empathy p { margin-top: 20px; color: var(--brown-soft); font-size: 1.02rem; }
 
 .process-grid {
