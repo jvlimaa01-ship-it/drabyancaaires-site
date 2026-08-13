@@ -390,7 +390,7 @@ h1, h2, h3 { font-weight: 600; margin: 0; letter-spacing: -0.01em; }
 .process-step h3 { font-size: 1rem; margin-bottom: 8px; }
 .process-step p { margin: 0; font-size: 0.9rem; color: var(--brown-soft); }
 
-.testimonials-inner { max-width: 900px; margin: 0 auto; }
+.testimonials-inner { max-width: 1080px; margin: 0 auto; }
 .testimonials-content {
   margin-top: 36px;
   display: grid;
@@ -721,16 +721,17 @@ h1, h2, h3 { font-weight: 600; margin: 0; letter-spacing: -0.01em; }
 .reviews-grid {
   margin-top: 40px;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 18px;
+  align-items: start;
 }
-@media (min-width: 700px) { .reviews-grid { grid-template-columns: 1fr 1fr; } }
-@media (min-width: 1000px) { .reviews-grid { grid-template-columns: 1fr 1fr 1fr; } }
 .review-card {
   background: #fff;
   border: 1px solid var(--border);
   border-radius: 14px;
   padding: 24px;
+  display: flex;
+  flex-direction: column;
 }
 .review-stars {
   display: block;
@@ -747,7 +748,8 @@ h1, h2, h3 { font-weight: 600; margin: 0; letter-spacing: -0.01em; }
 }
 .review-author {
   display: block;
-  margin-top: 14px;
+  margin-top: auto;
+  padding-top: 14px;
   font-weight: 600;
   font-size: 0.88rem;
   color: var(--brown-deep);
