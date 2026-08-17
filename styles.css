@@ -434,6 +434,7 @@ h1, h2, h3 { font-weight: 600; margin: 0; letter-spacing: -0.01em; }
 .space-text p { margin-top: 16px; color: var(--brown-soft); }
 
 .location-address { margin-top: 14px; color: var(--brown-soft); }
+.location-hours { margin-top: 6px; color: var(--brown-soft); font-size: 0.9rem; }
 .map-wrap {
   margin-top: 32px;
   border-radius: 18px;
