@@ -787,27 +787,6 @@ h1, h2, h3 { font-weight: 600; margin: 0; letter-spacing: -0.01em; }
 }
 
 .video-intro-inner {
-  max-width: 720px;
-  margin: 0 auto;
-  text-align: center;
-}
-.video-intro-inner .lead,
-.video-intro-inner h2 {
-  margin-bottom: 8px;
-}
-.video-embed {
-  margin-top: 32px;
-  display: flex;
-  justify-content: center;
-}
-.video-embed .instagram-media {
-  margin: 0 auto !important;
-  min-width: 300px !important;
-  max-width: 540px !important;
-  width: 100% !important;
-}
-
-.video-intro-inner {
   max-width: 640px;
   margin: 0 auto;
   text-align: center;
@@ -821,13 +800,18 @@ h1, h2, h3 { font-weight: 600; margin: 0; letter-spacing: -0.01em; }
   display: flex;
   justify-content: center;
 }
-.video-frame video {
+.video-frame-inner {
   width: 100%;
-  max-width: 340px;
-  aspect-ratio: 9 / 16;
+  max-width: 300px;
   border-radius: 20px;
+  overflow: hidden;
   box-shadow: 0 20px 50px rgba(58, 42, 32, 0.25);
   border: 1px solid var(--border);
   background: linear-gradient(180deg, var(--cream-2), var(--cream));
-  object-fit: cover;
+  line-height: 0;
+}
+.video-frame video {
+  display: block;
+  width: 100%;
+  height: auto;
 }

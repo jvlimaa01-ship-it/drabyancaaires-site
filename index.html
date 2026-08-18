@@ -247,17 +247,20 @@ function loadGTM(){
     <span class="eyebrow center">Direto da Dra. Byanca</span>
     <h2 class="center">As estrias não podem ser uma limitação para você</h2>
     <div class="video-frame">
-      <video
-        controls
-        preload="metadata"
-        playsinline
-        poster="img/video/dermo-strill-poster.jpg"
-        width="720"
-        height="1280"
-        aria-label="Vídeo da Dra. Byanca Aires sobre o método Dermo Strill®">
-        <source src="img/video/dermo-strill-video.mp4" type="video/mp4" />
-        Seu navegador não suporta vídeo em HTML5.
-      </video>
+      <div class="video-frame-inner">
+        <video
+          id="dermo-strill-video"
+          controls
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster="img/video/dermo-strill-poster.jpg"
+          aria-label="Vídeo da Dra. Byanca Aires sobre o método Dermo Strill®">
+          <source src="img/video/dermo-strill-video.mp4" type="video/mp4" />
+          Seu navegador não suporta vídeo em HTML5.
+        </video>
+      </div>
     </div>
   </div>
 </section>
@@ -672,6 +675,22 @@ function loadGTM(){
     localStorage.setItem('cookie_consent', 'rejected');
     banner.hidden = true;
   });
+})();
+</script>
+<script>
+(function () {
+  var video = document.getElementById('dermo-strill-video');
+  if (!video || !('IntersectionObserver' in window)) return;
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        video.play().catch(function () {});
+      } else {
+        video.pause();
+      }
+    });
+  }, { threshold: 0.5 });
+  observer.observe(video);
 })();
 </script>
 </body>
