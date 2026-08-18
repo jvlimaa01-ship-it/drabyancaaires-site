@@ -250,6 +250,14 @@ function loadGTM(){
           <source src="img/video/dermo-strill-video.mp4" type="video/mp4" />
           Seu navegador não suporta vídeo em HTML5.
         </video>
+        <button type="button" id="unmute-btn" class="unmute-btn" aria-label="Ativar som do vídeo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M11 5 6 9H3v6h3l5 4V5Z"/>
+            <line x1="23" y1="9" x2="17" y2="15"/>
+            <line x1="17" y1="9" x2="23" y2="15"/>
+          </svg>
+          <span>Ativar som</span>
+        </button>
       </div>
     </div>
     <div class="empathy-text">
@@ -675,7 +683,24 @@ function loadGTM(){
 <script>
 (function () {
   var video = document.getElementById('dermo-strill-video');
-  if (!video || !('IntersectionObserver' in window)) return;
+  var unmuteBtn = document.getElementById('unmute-btn');
+  if (!video) return;
+
+  function syncUnmuteBtn() {
+    if (!unmuteBtn) return;
+    unmuteBtn.classList.toggle('is-hidden', !video.muted);
+  }
+
+  if (unmuteBtn) {
+    unmuteBtn.addEventListener('click', function () {
+      video.muted = false;
+      video.play().catch(function () {});
+      syncUnmuteBtn();
+    });
+    video.addEventListener('volumechange', syncUnmuteBtn);
+  }
+
+  if (!('IntersectionObserver' in window)) return;
   var observer = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
@@ -686,6 +711,7 @@ function loadGTM(){
           video.muted = true;
           video.play().catch(function () {});
         });
+        syncUnmuteBtn();
       } else {
         video.pause();
       }
