@@ -235,18 +235,8 @@ function loadGTM(){
 </section>
 
 <section class="empathy">
-  <div class="container empathy-inner">
-    <h2>Você merece mais do que promessas. Mereça resultado real e seguro</h2>
-    <p>Estrias, cicatrizes, olheiras e manchas podem carregar anos de insegurança: aquela roupa que você deixa de usar, a maquiagem que tenta disfarçar o que incomoda, a sensação de já ter tentado de tudo sem ver resultado de verdade. Você não está sozinha nisso. Não precisa continuar convivendo com o que te incomoda no espelho. Imagine se olhar e não precisar mais disfarçar nada — usar a roupa que quiser, tirar a foto sem pensar duas vezes.</p>
-    <p>O método Dermo Strill® nasceu para dar uma resposta séria a essa busca: uma técnica própria, estudada e aplicada com responsabilidade, que já entregou 96% de redução na aparência de estrias e cicatrizes, sempre com segurança e zero intercorrências. Aqui, cuidado estético é tratado com a seriedade que ele merece.</p>
-  </div>
-</section>
-
-<section class="video-intro">
-  <div class="container video-intro-inner">
-    <span class="eyebrow center">Direto da Dra. Byanca</span>
-    <h2 class="center">As estrias não podem ser uma limitação para você</h2>
-    <div class="video-frame">
+  <div class="container empathy-split">
+    <div class="empathy-media">
       <div class="video-frame-inner">
         <video
           id="dermo-strill-video"
@@ -261,6 +251,11 @@ function loadGTM(){
           Seu navegador não suporta vídeo em HTML5.
         </video>
       </div>
+    </div>
+    <div class="empathy-text">
+      <h2>Você merece mais do que promessas. Mereça resultado real e seguro</h2>
+      <p>Estrias, cicatrizes, olheiras e manchas podem carregar anos de insegurança: aquela roupa que você deixa de usar, a maquiagem que tenta disfarçar o que incomoda, a sensação de já ter tentado de tudo sem ver resultado de verdade. Você não está sozinha nisso. Não precisa continuar convivendo com o que te incomoda no espelho. Imagine se olhar e não precisar mais disfarçar nada — usar a roupa que quiser, tirar a foto sem pensar duas vezes.</p>
+      <p>O método Dermo Strill® nasceu para dar uma resposta séria a essa busca: uma técnica própria, estudada e aplicada com responsabilidade, que já entregou 96% de redução na aparência de estrias e cicatrizes, sempre com segurança e zero intercorrências. Aqui, cuidado estético é tratado com a seriedade que ele merece.</p>
     </div>
   </div>
 </section>
@@ -680,17 +675,33 @@ function loadGTM(){
 <script>
 (function () {
   var video = document.getElementById('dermo-strill-video');
-  if (!video || !('IntersectionObserver' in window)) return;
-  var observer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        video.play().catch(function () {});
-      } else {
-        video.pause();
-      }
-    });
-  }, { threshold: 0.5 });
-  observer.observe(video);
+  if (!video) return;
+
+  // Navegadores bloqueiam vídeo com som automático sem interação do usuário.
+  // Ele começa mudo (permitido) e o som liga sozinho assim que a pessoa
+  // interagir com a página pela primeira vez (clique, toque ou rolagem).
+  function unmuteOnce() {
+    video.muted = false;
+    document.removeEventListener('click', unmuteOnce);
+    document.removeEventListener('touchstart', unmuteOnce);
+    document.removeEventListener('scroll', unmuteOnce);
+  }
+  document.addEventListener('click', unmuteOnce, { once: true, passive: true });
+  document.addEventListener('touchstart', unmuteOnce, { once: true, passive: true });
+  document.addEventListener('scroll', unmuteOnce, { once: true, passive: true });
+
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          video.play().catch(function () {});
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: 0.5 });
+    observer.observe(video);
+  }
 })();
 </script>
 </body>
