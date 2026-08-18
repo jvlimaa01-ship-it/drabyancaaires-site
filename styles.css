@@ -906,7 +906,7 @@ h1, h2, h3 { font-weight: 600; margin: 0; letter-spacing: -0.01em; }
   line-height: 1.35;
   padding: 10px 16px;
   border-radius: 18px;
-  max-width: 190px;
+  max-width: 220px;
   box-shadow: 0 8px 20px rgba(58, 42, 32, 0.2);
   opacity: 0;
   transform: translateX(8px);
@@ -948,7 +948,7 @@ h1, h2, h3 { font-weight: 600; margin: 0; letter-spacing: -0.01em; }
 }
 @media (max-width: 480px) {
   .whatsapp-float { width: 52px; height: 52px; }
-  .whatsapp-bubble { font-size: 0.8rem; padding: 9px 14px; max-width: 148px; }
+  .whatsapp-bubble { font-size: 0.8rem; padding: 9px 14px; max-width: 168px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .whatsapp-float::before { animation: none; }
