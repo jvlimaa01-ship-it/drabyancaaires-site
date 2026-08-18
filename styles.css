@@ -785,3 +785,24 @@ h1, h2, h3 { font-weight: 600; margin: 0; letter-spacing: -0.01em; }
   .cookie-banner-inner { flex-direction: column; align-items: stretch; }
   .cookie-banner-actions { justify-content: flex-end; }
 }
+
+.video-intro-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+.video-intro-inner .lead,
+.video-intro-inner h2 {
+  margin-bottom: 8px;
+}
+.video-embed {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+}
+.video-embed .instagram-media {
+  margin: 0 auto !important;
+  min-width: 300px !important;
+  max-width: 540px !important;
+  width: 100% !important;
+}
