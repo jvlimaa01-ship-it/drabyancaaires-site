@@ -736,3 +736,52 @@ h1, h2, h3 { font-weight: 600; margin: 0; letter-spacing: -0.01em; }
   font-size: 0.88rem;
   color: var(--brown-deep);
 }
+
+.cookie-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  background: var(--brown-deep);
+  color: var(--cream);
+  padding: 18px 0;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+}
+.cookie-banner-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.cookie-banner p {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--cream);
+  flex: 1 1 320px;
+}
+.cookie-banner a {
+  color: var(--cream);
+  text-decoration: underline;
+}
+.cookie-banner-actions {
+  display: flex;
+  gap: 10px;
+  flex: 0 0 auto;
+}
+.cookie-banner .btn-outline {
+  border-color: var(--cream);
+  color: var(--cream);
+}
+.cookie-banner .btn-outline:hover {
+  background: rgba(251, 246, 241, 0.1);
+}
+@media (max-width: 640px) {
+  .cookie-banner-inner { flex-direction: column; align-items: stretch; }
+  .cookie-banner-actions { justify-content: flex-end; }
+}

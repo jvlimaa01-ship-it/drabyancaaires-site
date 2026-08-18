@@ -31,12 +31,23 @@
 <script>
   if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
 </script>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-53QZSRQN');</script>
+<!-- Google Tag Manager (carrega somente após consentimento de cookies) -->
+<script>
+window.dataLayer = window.dataLayer || [];
+function loadGTM(){
+  if (window.__gtmLoaded) return;
+  window.__gtmLoaded = true;
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-53QZSRQN');
+}
+(function(){
+  var consent = localStorage.getItem('cookie_consent');
+  if (consent === 'accepted') { loadGTM(); }
+})();
+</script>
 <!-- End Google Tag Manager -->
 <script type="application/ld+json">
 {
@@ -150,11 +161,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </script>
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-53QZSRQN"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-
+<div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Aviso de cookies" hidden>
+  <div class="cookie-banner-inner">
+    <p>Usamos cookies para melhorar sua experiência e medir o desempenho do site. Você pode aceitar ou recusar o uso de cookies não essenciais. Veja nossa <a href="privacidade.html">Política de Privacidade</a>.</p>
+    <div class="cookie-banner-actions">
+      <button type="button" id="cookie-reject" class="btn btn-outline">Recusar</button>
+      <button type="button" id="cookie-accept" class="btn btn-primary">Aceitar</button>
+    </div>
+  </div>
+</div>
 <div id="top"></div>
 <header class="site-header">
   <div class="container header-inner">
@@ -563,6 +578,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="footer-links">
         <a href="https://wa.me/5598981109411?text=Ol%C3%A1%21%20Gostaria%20de%20saber%20mais%20sobre%20os%20tratamentos%20da%20Dra.%20Byanca%20Aires." target="_blank" rel="noopener noreferrer">WhatsApp</a>
         <a href="https://www.instagram.com/drabyancaaires/" target="_blank" rel="noopener noreferrer">Instagram @drabyancaaires</a>
+        <a href="privacidade.html">Política de Privacidade</a>
       </div>
     </div>
   </div>
@@ -616,6 +632,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         link_location: link.closest('section') ? link.closest('section').className : 'header'
       });
     });
+  });
+})();
+</script>
+<script>
+(function () {
+  var banner = document.getElementById('cookie-banner');
+  var acceptBtn = document.getElementById('cookie-accept');
+  var rejectBtn = document.getElementById('cookie-reject');
+  if (!banner) return;
+  var consent = localStorage.getItem('cookie_consent');
+  if (!consent) { banner.hidden = false; }
+  acceptBtn.addEventListener('click', function () {
+    localStorage.setItem('cookie_consent', 'accepted');
+    banner.hidden = true;
+    if (typeof loadGTM === 'function') { loadGTM(); }
+  });
+  rejectBtn.addEventListener('click', function () {
+    localStorage.setItem('cookie_consent', 'rejected');
+    banner.hidden = true;
   });
 })();
 </script>
