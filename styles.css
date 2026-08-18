@@ -501,11 +501,14 @@ h1, h2, h3 { font-weight: 600; margin: 0; letter-spacing: -0.01em; }
   display: grid;
   grid-template-columns: 1fr;
   gap: 32px;
+  text-align: center;
 }
+.stat-item p { margin: 0 auto; }
 @media (min-width: 720px) {
-  .stats-grid { grid-template-columns: repeat(3, 1fr); gap: 0; }
+  .stats-grid { grid-template-columns: repeat(3, 1fr); gap: 0; text-align: left; }
   .stat-item { border-left: 1px solid var(--border); padding-left: 28px; }
   .stat-item:first-child { border-left: none; padding-left: 0; }
+  .stat-item p { margin: 0; }
 }
 .stat-number, .stat-number-static {
   display: block;
@@ -516,7 +519,7 @@ h1, h2, h3 { font-weight: 600; margin: 0; letter-spacing: -0.01em; }
   line-height: 1;
   margin-bottom: 10px;
 }
-.stat-item p { margin: 0; color: var(--brown-soft); font-size: 0.92rem; max-width: 280px; }
+.stat-item p { color: var(--brown-soft); font-size: 0.92rem; max-width: 280px; }
 
 /* Purpose */
 .purpose { padding: var(--section-y) 0; }
