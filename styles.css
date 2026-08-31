@@ -704,6 +704,12 @@ h1, h2, h3 { font-weight: 600; margin: 0; letter-spacing: -0.01em; }
 }
 .google-rating:hover { border-color: var(--accent); }
 .google-rating strong { color: var(--accent-dark); }
+.hero-social-proof {
+  margin: 22px auto 0;
+}
+@media (min-width: 900px) {
+  .hero-social-proof { margin: 22px 0 0; }
+}
 .reviews-grid {
   margin-top: 40px;
   display: grid;
