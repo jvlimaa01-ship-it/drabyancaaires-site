@@ -969,3 +969,32 @@ h1, h2, h3 { font-weight: 600; margin: 0; letter-spacing: -0.01em; }
     transition: none;
   }
 }
+
+/* Galeria da seção "O espaço" */
+.space-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 32px;
+}
+.space-photo {
+  border-radius: 14px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  box-shadow: 0 8px 20px rgba(58, 42, 32, 0.12);
+}
+.space-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.space-photo:hover img {
+  transform: scale(1.05);
+}
+@media (max-width: 720px) {
+  .space-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
