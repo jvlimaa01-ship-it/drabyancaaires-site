@@ -538,7 +538,13 @@ function loadGTM(){
       <p>Um ambiente pensado para o seu conforto: elegante, acolhedor e cuidado em cada detalhe, para que sua experiência seja tão agradável quanto o resultado que você vai conquistar.</p>
     </div>
     <div class="space-gallery">
-      <div class="space-track">
+      <button type="button" class="space-arrow space-arrow-prev" id="spacePrev" aria-label="Ver fotos anteriores">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button type="button" class="space-arrow space-arrow-next" id="spaceNext" aria-label="Ver próximas fotos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+      <div class="space-track" id="spaceTrack">
         <div class="space-photo"><img src="img/espaco/espaco-1-recepcao.jpg" alt="Recepção da clínica da Dra. Byanca Aires" loading="lazy" decoding="async" /></div>
         <div class="space-photo"><img src="img/espaco/espaco-9-logo.jpg" alt="Letreiro Byanca Aires na parede do consultório" loading="lazy" decoding="async" /></div>
         <div class="space-photo"><img src="img/espaco/espaco-2-sala-tratamento.jpg" alt="Sala de tratamento da clínica da Dra. Byanca Aires" loading="lazy" decoding="async" /></div>
@@ -826,6 +832,69 @@ function loadGTM(){
     });
   }, { threshold: 0.2, rootMargin: '0px 0px -160px 0px' });
   revealEls.forEach(function (el) { io.observe(el); });
+})();
+</script>
+<script>
+(function () {
+  var gallery = document.querySelector('.space-gallery');
+  var track = document.getElementById('spaceTrack');
+  var prevBtn = document.getElementById('spacePrev');
+  var nextBtn = document.getElementById('spaceNext');
+  if (!gallery || !track || !prevBtn || !nextBtn) return;
+
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var pos = 0;
+  var half = 0;
+  var speed = 22; // pixels por segundo — velocidade do movimento automatico (mais baixo = mais lento)
+  var paused = false;
+  var lastTs = null;
+
+  function measure() {
+    half = track.scrollWidth / 2;
+  }
+  measure();
+  window.addEventListener('resize', measure);
+
+  function apply() {
+    if (half > 0) {
+      // mantem a posicao sempre dentro de uma volta, pro loop ficar continuo
+      pos = ((pos % half) + half) % half;
+    }
+    track.style.transform = 'translateX(' + (-pos) + 'px)';
+  }
+
+  function step(ts) {
+    if (!paused && !reduceMotion) {
+      if (lastTs === null) lastTs = ts;
+      var dt = (ts - lastTs) / 1000;
+      lastTs = ts;
+      pos += speed * dt;
+      apply();
+    } else {
+      lastTs = ts;
+    }
+    requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+
+  function jump(direction) {
+    var card = track.querySelector('.space-photo');
+    var cardWidth = card ? card.getBoundingClientRect().width + 16 : 320;
+    pos += direction * cardWidth;
+    apply();
+    paused = true;
+    clearTimeout(gallery._resumeTimer);
+    gallery._resumeTimer = setTimeout(function () { paused = false; }, 2600);
+  }
+
+  prevBtn.addEventListener('click', function () { jump(-1); });
+  nextBtn.addEventListener('click', function () { jump(1); });
+
+  gallery.addEventListener('mouseenter', function () { paused = true; });
+  gallery.addEventListener('mouseleave', function () {
+    clearTimeout(gallery._resumeTimer);
+    paused = false;
+  });
 })();
 </script>
 </body>
