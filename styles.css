@@ -970,31 +970,60 @@ h1, h2, h3 { font-weight: 600; margin: 0; letter-spacing: -0.01em; }
   }
 }
 
-/* Galeria da seção "O espaço" */
+/* Galeria da seção "O espaço": faixa horizontal contínua */
 .space-gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
   margin-top: 32px;
+  overflow: hidden;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
+}
+.space-track {
+  display: flex;
+  width: max-content;
+  gap: 16px;
+  padding: 6px 0;
+  animation: space-scroll 34s linear infinite;
+}
+.space-gallery:hover .space-track {
+  animation-play-state: paused;
 }
 .space-photo {
+  flex: 0 0 auto;
+  width: 320px;
+  aspect-ratio: 4/3;
   border-radius: 14px;
   overflow: hidden;
-  aspect-ratio: 4/3;
   box-shadow: 0 8px 20px rgba(58, 42, 32, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+.space-photo:hover {
+  transform: scale(1.08) translateY(-6px);
+  box-shadow: 0 16px 34px rgba(58, 42, 32, 0.28);
+  z-index: 2;
 }
 .space-photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.4s ease;
 }
-.space-photo:hover img {
-  transform: scale(1.05);
+@keyframes space-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 @media (max-width: 720px) {
-  .space-gallery {
-    grid-template-columns: repeat(2, 1fr);
+  .space-photo {
+    width: 220px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .space-track {
+    animation: none;
   }
 }
